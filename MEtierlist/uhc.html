@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UHC Tier List</title>
+
+<style>
+
+/* BACKGROUND */
+
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(270deg,#1a0033,#2a0066,#001a66,#3b0077);
+background-size:800% 800%;
+animation:gradientMove 10s ease infinite;
+color:white;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* BACK BUTTON */
+
+.backbtn{
+position:absolute;
+left:20px;
+top:10px;
+background:#2a0066;
+color:white;
+padding:10px 18px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+gap:120px;
+padding:25px 40px;
+}
+
+/* TITLE */
+
+.title{
+font-size:64px;
+font-weight:bold;
+letter-spacing:3px;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+gap:14px;
+}
+
+/* NAV ITEMS */
+
+.navitem{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+width:80px;
+height:70px;
+border-radius:12px;
+background:rgba(40,0,80,0.45);
+text-decoration:none;
+color:#ccc;
+font-size:13px;
+}
+
+.navitem img{
+width:34px;
+height:34px;
+object-fit:contain;
+margin-bottom:4px;
+}
+
+/* SEARCH */
+
+.search{
+width:500px;
+height:42px;
+border-radius:25px;
+border:1px solid #5b3cff;
+background:#140033;
+color:white;
+padding:0 18px;
+font-size:15px;
+display:block;
+margin:20px auto 30px auto;
+}
+
+/* TIER GRID */
+
+.tiers{
+width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:20px;
+}
+
+/* TIER BOX */
+
+.tier-box{
+background:#12002b;
+border-radius:12px;
+overflow:hidden;
+border:1px solid #4a3cff;
+}
+
+/* HEADERS */
+
+.tier-header{
+padding:12px;
+font-size:20px;
+font-weight:bold;
+text-align:center;
+}
+
+/* TIER COLORS */
+
+.t1{background:#ff3b3b;}
+.t2{background:#ffcc00;color:black;}
+.t3{background:#4caf50;}
+.t4{background:#3fa9f5;}
+.t5{background:#9c6bff;}
+
+/* PLAYER */
+
+.player{
+display:flex;
+align-items:center;
+padding:10px;
+border-top:1px solid #2c3c4f;
+background:#202c3a;
+cursor:pointer;
+}
+
+.player:hover{
+background:#263646;
+}
+
+.skin{
+width:30px;
+height:30px;
+margin-right:10px;
+}
+
+.ht{
+border-left:3px solid #00ff7b;
+padding-left:8px;
+}
+
+.lt{
+border-left:3px solid #ff4a4a;
+padding-left:8px;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.popup-box{
+background:#0e1a2b;
+padding:40px;
+border-radius:20px;
+width:420px;
+text-align:center;
+position:relative;
+}
+
+.popup-skin{
+width:90px;
+margin-bottom:10px;
+}
+
+.close{
+position:absolute;
+right:20px;
+top:15px;
+font-size:22px;
+cursor:pointer;
+}
+
+.kit{
+background:#2a0066;
+padding:4px 10px;
+border-radius:6px;
+font-size:13px;
+margin:3px;
+display:inline-block;
+}
+
+.badge{
+padding:6px 12px;
+border-radius:8px;
+font-weight:bold;
+margin:3px;
+display:inline-block;
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="backbtn">⬅ Back</a>
+
+<div class="header">
+
+<div class="title">METierlist</div>
+
+<div class="navbar">
+
+<a class="navitem" href="vanilla.html">
+<img src="https://tse1.mm.bing.net/th/id/OIP.Hb-6EapmYHc8XCrrCpqnfwHaHa">
+Vanilla
+</a>
+
+<a class="navitem" href="uhc.html">
+<img src="https://tse1.mm.bing.net/th/id/OIP.KoPBTJLqUQlkqK7L0GYKlwHaHa">
+UHC
+</a>
+
+<a class="navitem" href="pot.html">
+<img src="https://tse3.mm.bing.net/th/id/OIP.HAFerNkjMUAG81AyvAIYRAAAAA">
+Pot
+</a>
+
+<a class="navitem" href="nethop.html">
+<img src="https://tse3.mm.bing.net/th/id/OIP.qgo4u6yoqCR4BD_WaZw1rwAAAA">
+NethOP
+</a>
+
+<a class="navitem" href="smp.html">
+<img src="https://tse3.mm.bing.net/th/id/OIP.hYBzkqjSVBTJiqt20SicpgAAAA">
+SMP
+</a>
+
+<a class="navitem" href="sword.html">
+<img src="https://tse1.mm.bing.net/th/id/OIP.Z4_3gd4UnU1Ie662PPMxpwHaGT">
+Sword
+</a>
+
+<a class="navitem" href="axe.html">
+<img src="https://tse1.mm.bing.net/th/id/OIP.mRxdoWwSM9t6Y0Vw4jtQcQAAAA">
+Axe
+</a>
+
+<a class="navitem" href="mace.html">
+<img src="https://tse2.mm.bing.net/th/id/OIP.v0d9FlsS08oKVIu5TVYILAHaHa">
+Mace
+</a>
+
+</div>
+</div>
+
+<input class="search" id="search" placeholder="Search UHC player...">
+
+<div class="tiers">
+
+<div class="tier-box"><div class="tier-header t1">🏆 Tier 1</div><div id="tier1"></div></div>
+<div class="tier-box"><div class="tier-header t2">🥈 Tier 2</div><div id="tier2"></div></div>
+<div class="tier-box"><div class="tier-header t3">🥉 Tier 3</div><div id="tier3"></div></div>
+<div class="tier-box"><div class="tier-header t4">Tier 4</div><div id="tier4"></div></div>
+<div class="tier-box"><div class="tier-header t5">Tier 5</div><div id="tier5"></div></div>
+
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-box">
+
+<div class="close" onclick="closePopup()">✖</div>
+
+<img id="popupSkin" class="popup-skin">
+<h2 id="popupName"></h2>
+
+<h4>Kits</h4>
+<div id="popupKits"></div>
+
+<h4>Tiers</h4>
+<div id="popupTiers"></div>
+
+</div>
+</div>
+
+<script src="players.js"></script>
+
+<script>
+
+/* HIGHEST TIER MERGE */
+
+const tierRank={
+HT1:10,LT1:9,
+HT2:8,LT2:7,
+HT3:6,LT3:5,
+HT4:4,LT4:3,
+HT5:2,LT5:1
+};
+
+const merged={};
+
+players.forEach(p=>{
+
+if(!merged[p.name]){
+merged[p.name]={name:p.name,kits:{}};
+}
+
+p.kits.forEach((kit,i)=>{
+
+let tier=p.tiers[i];
+
+if(!merged[p.name].kits[kit] ||
+tierRank[tier] > tierRank[merged[p.name].kits[kit]]){
+merged[p.name].kits[kit]=tier;
+}
+
+});
+
+});
+
+players.length=0;
+
+Object.values(merged).forEach(p=>{
+
+let kits=[];
+let tiers=[];
+
+Object.keys(p.kits).forEach(k=>{
+kits.push(k);
+tiers.push(p.kits[k]);
+});
+
+players.push({name:p.name,kits:kits,tiers:tiers});
+
+});
+
+/* RENDER */
+
+function getTierNumber(t){
+return parseInt(t.replace("HT","").replace("LT",""));
+}
+
+function render(list){
+
+document.querySelectorAll("#tier1,#tier2,#tier3,#tier4,#tier5")
+.forEach(el=>el.innerHTML="");
+
+list.forEach(p=>{
+
+let index=p.kits.indexOf("UHC");
+if(index===-1) return;
+
+let tier=p.tiers[index];
+let tierNumber=getTierNumber(tier);
+
+let type=tier.startsWith("HT")?"ht":"lt";
+
+let container=document.getElementById("tier"+tierNumber);
+
+let div=document.createElement("div");
+div.className="player "+type;
+
+div.onclick=()=>openProfile(p);
+
+div.innerHTML=`
+<img class="skin" src="https://mc-heads.net/avatar/${p.name}">
+${p.name}
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+/* POPUP */
+
+function openProfile(p){
+
+popup.style.display="flex";
+
+popupSkin.src=`https://mc-heads.net/avatar/${p.name}`;
+popupName.innerText=p.name;
+
+let kits="";
+p.kits.forEach(k=>{
+kits+=`<span class="kit">${k}</span>`;
+});
+popupKits.innerHTML=kits;
+
+let tiers="";
+p.tiers.forEach(t=>{
+
+let n=t.replace("HT","").replace("LT","");
+tiers+=`<span class="badge t${n}">${t}</span>`;
+
+});
+popupTiers.innerHTML=tiers;
+
+}
+
+function closePopup(){
+popup.style.display="none";
+}
+
+render(players);
+
+/* SEARCH */
+
+document.getElementById("search").addEventListener("input",function(){
+
+let text=this.value.toLowerCase();
+
+let filtered=players.filter(p=>
+p.name.toLowerCase().includes(text)
+);
+
+render(filtered);
+
+});
+
+</script>
+
+</body>
+</html>

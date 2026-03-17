@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>METierlist</title>
+
+<script type="text/javascript">
+(function (l) {
+  if (l.search[1] === "/") {
+    var decoded = l.search
+      .slice(1)
+      .split("&")
+      .map(function (s) {
+        return s.replace(/~and~/g, "&");
+      })
+      .join("?");
+    window.history.replaceState(
+      null,
+      null,
+      l.pathname.slice(0, -1) + decoded + l.hash
+    );
+  }
+})(window.location);
+</script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(270deg,#1a0033,#2a0066,#001a66,#3b0077);
+background-size:800% 800%;
+animation:gradientMove 10s ease infinite;
+color:white;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+gap:120px;
+padding:25px 40px;
+}
+
+.title{
+font-size:64px;
+font-weight:bold;
+letter-spacing:3px;
+text-shadow:
+0 0 10px rgba(120,120,255,0.8),
+0 0 20px rgba(120,120,255,0.6),
+0 0 40px rgba(120,120,255,0.4);
+}
+
+.navbar{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.navitem{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+width:75px;
+height:65px;
+border-radius:12px;
+text-decoration:none;
+color:#ccc;
+font-size:12px;
+background:rgba(40,0,80,0.45);
+transition:0.2s;
+}
+
+.navitem:hover{
+background:#3b2aa8;
+transform:translateY(-3px);
+color:white;
+}
+
+.navitem img{
+width:32px;
+height:32px;
+margin-bottom:4px;
+}
+
+/* CONTAINER */
+
+.container{
+width:850px;
+margin:120px auto 60px auto;
+}
+
+/* SEARCH */
+
+.search{
+width:100%;
+height:44px;
+border-radius:25px;
+border:1px solid #5b3cff;
+background:#140033;
+color:white;
+padding:0 20px;
+margin-bottom:30px;
+font-size:16px;
+}
+
+/* PLAYER CARD */
+
+.player-card{
+display:flex;
+align-items:center;
+background:#12002b;
+border:1px solid #4a3cff;
+border-radius:14px;
+padding:18px;
+margin-bottom:14px;
+cursor:pointer;
+transition:0.15s;
+}
+
+.player-card:hover{
+transform:scale(1.02);
+}
+
+/* TOP 3 */
+
+.first{
+background:linear-gradient(135deg,#b9f2ff,#7dd3ff);
+color:#003344;
+box-shadow:0 0 20px rgba(120,220,255,0.8);
+}
+.second{background:linear-gradient(135deg,#c0c0c0,#8a8a8a);}
+.third{background:linear-gradient(135deg,#cd7f32,#8b5a2b);}
+
+/* SKIN */
+
+.skin{
+width:64px;
+height:64px;
+margin-right:20px;
+}
+
+/* PLAYER INFO */
+
+.info{flex:1;}
+
+.name{
+font-size:22px;
+font-weight:bold;
+}
+
+.region{
+display:inline-block;
+padding:3px 10px;
+border-radius:6px;
+font-size:12px;
+margin-bottom:6px;
+}
+
+/* REGION COLORS */
+
+.NA{background:#ff4d4d;}
+.EU{background:#4da6ff;}
+.AS{background:#ffcc00;color:black;}
+.ME{background:#8aff66;color:black;}
+
+/* KITS */
+
+.kits{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-bottom:8px;
+}
+
+.kit{
+background:#2a0066;
+padding:4px 10px;
+border-radius:6px;
+font-size:13px;
+color:white;
+}
+
+/* TIERS */
+
+.tiers{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+
+.badge{
+padding:6px 12px;
+border-radius:8px;
+font-weight:bold;
+}
+
+/* TIER COLORS */
+
+.HT1{background:#ff3b3b;}
+.LT1{background:#ff8a3b;}
+
+.HT2{background:#ffcc00;color:black;}
+.LT2{background:#e6b800;color:black;}
+
+.HT3{background:#4caf50;}
+.LT3{background:#3e8e41;}
+
+.HT4{background:#3fa9f5;}
+.LT4{background:#2f7ec1;}
+
+.HT5{background:#9c6bff;}
+.LT5{background:#7a52c7;}
+
+.points{
+font-size:20px;
+font-weight:bold;
+color:#6aa9ff;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.popup-box{
+background:#0e1a2b;
+padding:40px;
+border-radius:20px;
+width:420px;
+text-align:center;
+position:relative;
+}
+
+.popup-skin{
+width:90px;
+border-radius:50%;
+margin-bottom:10px;
+}
+
+.close{
+position:absolute;
+right:20px;
+top:15px;
+font-size:22px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="title">METierlist</div>
+
+<div class="navbar">
+<a class="navitem" href="vanilla.html"><img src="https://tse1.mm.bing.net/th/id/OIP.Hb-6EapmYHc8XCrrCpqnfwHaHa">Vanilla</a>
+<a class="navitem" href="uhc.html"><img src="https://tse1.mm.bing.net/th/id/OIP.KoPBTJLqUQlkqK7L0GYKlwHaHa">UHC</a>
+<a class="navitem" href="pot.html"><img src="https://tse3.mm.bing.net/th/id/OIP.HAFerNkjMUAG81AyvAIYRAAAAA">Pot</a>
+<a class="navitem" href="nethop.html"><img src="https://tse3.mm.bing.net/th/id/OIP.qgo4u6yoqCR4BD_WaZw1rwAAAA">NethOP</a>
+<a class="navitem" href="smp.html"><img src="https://tse3.mm.bing.net/th/id/OIP.hYBzkqjSVBTJiqt20SicpgAAAA">SMP</a>
+<a class="navitem" href="sword.html"><img src="https://tse1.mm.bing.net/th/id/OIP.Z4_3gd4UnU1Ie662PPMxpwHaGT">Sword</a>
+<a class="navitem" href="axe.html"><img src="https://tse1.mm.bing.net/th/id/OIP.mRxdoWwSM9t6Y0Vw4jtQcQAAAA">Axe</a>
+<a class="navitem" href="mace.html"><img src="https://tse2.mm.bing.net/th/id/OIP.v0d9FlsS08oKVIu5TVYILAHaHa">Mace</a>
+</div>
+
+</div>
+
+<div class="container">
+<input class="search" id="search" placeholder="Search player...">
+<div id="players"></div>
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-box">
+<div class="close" onclick="closePopup()">✖</div>
+<img id="popupSkin" class="popup-skin">
+<h2 id="popupName"></h2>
+<div id="popupRegion"></div>
+<h3 id="popupPoints"></h3>
+<h4>Kits</h4>
+<div id="popupKits"></div>
+<h4>Tiers</h4>
+<div id="popupTiers"></div>
+</div>
+</div>
+
+<script src="players.js"></script>
+
+<script>
+
+/* --- PREPROCESS PLAYERS (merge same player + keep highest tier per kit) --- */
+
+const tierRank={
+HT1:10,LT1:9,
+HT2:8,LT2:7,
+HT3:6,LT3:5,
+HT4:4,LT4:3,
+HT5:2,LT5:1
+};
+
+const merged={};
+
+players.forEach(p=>{
+
+if(!merged[p.name]){
+merged[p.name]={
+name:p.name,
+region:p.region,
+kits:{}
+};
+}
+
+p.kits.forEach((kit,i)=>{
+
+const key=kit.toLowerCase();
+const tier=p.tiers[i];
+
+if(!merged[p.name].kits[key] || tierRank[tier] > tierRank[merged[p.name].kits[key]]){
+merged[p.name].kits[key]=tier;
+}
+
+});
+
+});
+
+players.length=0;
+
+Object.values(merged).forEach(p=>{
+
+const kits=[];
+const tiers=[];
+
+Object.keys(p.kits).forEach(k=>{
+kits.push(k);
+tiers.push(p.kits[k]);
+});
+
+players.push({
+name:p.name,
+region:p.region,
+kits:kits,
+tiers:tiers
+});
+
+});
+
+/* YOUR ORIGINAL CODE */
+
+const tierPoints={
+HT1:60,LT1:45,
+HT2:30,LT2:20,
+HT3:10,LT3:6,
+HT4:4,LT4:3,
+HT5:2,LT5:1
+};
+
+players.forEach(p=>{
+let total=0;
+p.tiers.forEach(t=>total+=tierPoints[t]);
+p.points=total;
+});
+
+players.sort((a,b)=>b.points-a.points);
+
+function render(list){
+
+const container=document.getElementById("players");
+container.innerHTML="";
+
+list.forEach((p,i)=>{
+
+let rankClass="";
+if(i===0) rankClass="first";
+else if(i===1) rankClass="second";
+else if(i===2) rankClass="third";
+
+let kitsHTML="";
+p.kits.forEach(k=>{
+kitsHTML+=`<span class="kit">${k}</span>`;
+});
+
+let tiersHTML="";
+p.tiers.forEach(t=>{
+tiersHTML+=`<span class="badge ${t}">${t}</span>`;
+});
+
+let card=document.createElement("div");
+
+card.className="player-card "+rankClass;
+card.onclick=()=>openProfile(p);
+
+card.innerHTML=`
+<img class="skin" src="https://mc-heads.net/avatar/${p.name}">
+<div class="info">
+<div class="name">#${i+1} ${p.name}</div>
+<div class="region ${p.region}">${p.region}</div>
+<div class="kits">${kitsHTML}</div>
+<div class="tiers">${tiersHTML}</div>
+</div>
+<div class="points">${p.points} pts</div>
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+function openProfile(p){
+
+document.getElementById("popup").style.display="flex";
+
+popupSkin.src=`https://mc-heads.net/avatar/${p.name}`;
+popupName.innerText=p.name;
+popupRegion.innerText=p.region;
+popupPoints.innerText=p.points+" points";
+
+let kits="";
+p.kits.forEach(k=>{
+kits+=`<span class="kit">${k}</span>`;
+});
+popupKits.innerHTML=kits;
+
+let tiers="";
+p.tiers.forEach(t=>{
+tiers+=`<span class="badge ${t}">${t}</span>`;
+});
+popupTiers.innerHTML=tiers;
+
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+render(players);
+
+search.addEventListener("input",()=>{
+
+let text=search.value.toLowerCase();
+
+let filtered=players.filter(p =>
+p.name.toLowerCase().includes(text)
+);
+
+render(filtered);
+
+});
+
+</script>
+
+</body>
+</html>
